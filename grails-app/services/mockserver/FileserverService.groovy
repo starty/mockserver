@@ -1,5 +1,7 @@
 package mockserver
 
+import exceptions.NotFoundException
+
 //import com.ml.exceptions.NotFoundException;
 
 import grails.converters.JSON
@@ -17,11 +19,11 @@ class FileserverService {
 
         File threadFile
         String jsonText
-     //   try {
+        try {
             threadFile = new File(baseDir,"${path}.JSON")
             jsonText = threadFile.getText()
-        /*} catch (Exception e){
-            if (queryString){
+        } catch (Exception e){
+           /* if (queryString){
                 try {
                     println "queryString= $queryString"
                     threadFile = new File(baseDir,"${path}?${queryString}.JSON")
@@ -33,8 +35,10 @@ class FileserverService {
             } else {
                 return null
                 //throw new NotFoundException("Resource not found: $path")
-            }
-        }  */
+            } */
+          //  return null
+            throw new NotFoundException ("Resource not found: $path")
+        }
         def json = JsonParser.parse(jsonText)
 
         return json

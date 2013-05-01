@@ -6,7 +6,7 @@ class StartyException extends RuntimeException {
     def status = 500
     def error
     Throwable cause  = []
-    //def causeMap = [:]
+    def causeMap = [:]
 
     def StartyException(message, error, cause) {
         super(message.toString())
@@ -18,10 +18,10 @@ class StartyException extends RuntimeException {
         super(message)
     }
 
-    /*def StartyException(String message,  Map cause){
+    def StartyException(String message,  Map cause){
         super(message)
         this.causeMap = cause
-    }     */
+    }
 
     def StartyException() {
         super("internal_error")

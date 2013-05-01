@@ -19,15 +19,19 @@ class FileserverController {
         String path = getPath()
         String queryString = request.getQueryString()
 
+         try {
+                def json = fileserverService.getJsonFromFile(path, queryString)
+               // if (!json){
+                 //   throw new NotFoundException ("Resource not found: $path - $queryString")
+               // }
 
-        def json = fileserverService.getJsonFromFile(path, queryString)
-        if (!json){
-            throw new NotFoundException ("Resource not found: $path - $queryString")
-        }
+                response.status = 200
+                render json as JSON
+                return
+         } catch (NotFoundException e)     {
+        response.status = 404
+        return                              }
 
-        response.status = 200
-        render json as JSON
-        return
 
     }
 
